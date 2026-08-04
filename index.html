@@ -135,8 +135,6 @@
   .reset-btn{font-family:inherit;font-size:.76rem;font-weight:600;color:var(--muted);background:none;border:1px solid var(--line-strong);border-radius:999px;padding:9px 14px;cursor:pointer;transition:all .18s var(--ease);white-space:nowrap}
   .reset-btn:hover{color:var(--ink);border-color:var(--brand)}
   .reset-btn[hidden]{display:none}
-  .add-btn{font-family:inherit;font-size:.82rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-strong));border:1px solid var(--brand-strong);border-radius:999px;padding:9px 16px;cursor:pointer;transition:all .18s var(--ease);white-space:nowrap;box-shadow:0 6px 18px -10px rgba(47,111,214,.55)}
-  .add-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px -10px rgba(79,156,249,.9)}
 
   /* ============ 网格 + 卡片 ============ */
   .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
@@ -188,20 +186,6 @@
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   .card.anim{animation:rise .5s var(--ease) both}
 
-  /* ============ 扩展说明 ============ */
-  .extend{margin-top:34px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
-    backdrop-filter:blur(8px);overflow:hidden}
-  .extend summary{cursor:pointer;padding:16px 20px;font-weight:700;font-size:.9rem;color:var(--ink);
-    list-style:none;display:flex;align-items:center;gap:9px;user-select:none}
-  .extend summary::-webkit-details-marker{display:none}
-  .extend summary::before{content:"+";font-weight:800;color:var(--brand);font-size:1.1rem}
-  .extend[open] summary::before{content:"–"}
-  .extend__body{padding:0 20px 20px;font-size:.85rem;color:var(--ink-soft);line-height:1.75}
-  .extend code{font-family:var(--font-mono);font-size:.8rem;background:var(--surface-2);border:1px solid var(--line);
-    padding:1px 7px;border-radius:6px;color:var(--brand)}
-  .extend pre{background:#1e293b;color:#dbeafe;padding:16px 18px;border-radius:var(--r-sm);overflow:auto;
-    font-family:var(--font-mono);font-size:.78rem;line-height:1.65;margin:12px 0;border:1px solid var(--line)}
-
   footer{display:none}
 
   /* ============ 模态框 ============ */
@@ -228,12 +212,6 @@
   .card__del{position:absolute;top:10px;right:44px;width:24px;height:24px;border-radius:7px;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--muted);font-size:.78rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2}
   .card:hover .card__del{opacity:1}
   .card__del:hover{background:rgba(245,90,90,.16);border-color:#f55a5a;color:#ff8a8a}
-  .add-form{padding:18px 20px 20px;display:flex;flex-direction:column;gap:14px;overflow:auto}
-  .add-form label{display:flex;flex-direction:column;gap:6px;font-size:.8rem;color:var(--ink-soft);font-weight:600}
-  .add-form input,.add-form select{font-family:inherit;font-size:.9rem;padding:10px 12px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink)}
-  .add-form input:focus,.add-form select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,156,249,.14)}
-  .add-note{font-size:.76rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin:0;line-height:1.5}
-  .add-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
   .modal--center{padding:20px;align-items:center;justify-content:center}
   .modal--center.open{display:flex}
   .modal--center .modal__panel{position:relative;inset:auto;width:min(460px,92vw);max-height:90vh}
@@ -259,9 +237,49 @@
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
   }
+
+  /* ============ 登录遮罩 ============ */
+  .login-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+    background:rgba(15,23,42,.6);backdrop-filter:blur(12px)}
+  .login-overlay.unlocked{opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+  .login-card{width:min(380px,88vw);background:var(--solid);border:1px solid var(--line-strong);
+    border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:36px 28px 28px;text-align:center}
+  .login-logo{width:52px;height:52px;margin:0 auto 18px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(145deg,rgba(79,156,249,.15),rgba(20,184,166,.08));
+    border:1px solid var(--line-strong);color:var(--brand)}
+  .login-logo svg{width:28px;height:28px}
+  .login-card h2{margin:0 0 6px;font-size:1.15rem;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .login-card p{margin:0 0 22px;font-size:.82rem;color:var(--muted)}
+  .login-input{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;
+    border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink);
+    font-size:.95rem;font-family:inherit;text-align:center;letter-spacing:3px;outline:none;
+    transition:border-color .2s,var(--ease)}
+  .login-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,156,249,.14)}
+  .login-input::placeholder{letter-spacing:0;color:var(--muted);font-size:.82rem}
+  .login-btn{width:100%;margin-top:14px;padding:12px;border-radius:10px;border:none;
+    background:linear-gradient(135deg,var(--brand),var(--brand-strong));color:#fff;font-size:.9rem;
+    font-weight:700;cursor:pointer;transition:all .2s var(--ease);letter-spacing:.5px}
+  .login-btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px -10px rgba(79,156,249,.7)}
+  .login-btn:active{transform:translateY(0)}
+  .login-err{margin-top:10px;font-size:.78rem;color:#e53e3e;min-height:1em;opacity:0;transition:opacity .2s}
+  .login-err.show{opacity:1}
 </style>
 </head>
 <body>
+
+  <!-- 登录遮罩 -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <h2>XIANG 工具箱</h2>
+      <p>请输入访问密码</p>
+      <input class="login-input" id="loginInput" type="password" placeholder="· · · · · · ·" autocomplete="off">
+      <button class="login-btn" id="loginBtn">验证进入</button>
+      <div class="login-err" id="loginErr">密码错误，请重新输入</div>
+    </div>
+  </div>
 
   <nav class="nav">
     <div class="nav__brand">
@@ -329,7 +347,6 @@
     <div class="toolbar">
       <div class="filters" id="filters" role="group" aria-label="按分类筛选"></div>
       <button class="reset-btn" id="resetOrder" title="恢复默认顺序" hidden>↺ 重置顺序</button>
-      <button class="add-btn" id="addTool">＋ 添加工具</button>
       <div class="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
         <input id="searchInput" type="search" placeholder="搜索工具名称或标签…" aria-label="搜索工具">
@@ -338,13 +355,6 @@
 
     <section class="grid" id="grid" aria-live="polite"></section>
 
-    <details class="extend">
-      <summary>如何添加新工具（供后续扩展）</summary>
-            <div class="extend__body">
-        <p>本页为<b>单文件版</b>：9 个工具已全部内嵌于本 HTML 中，点击任意工具均<b>不会暴露本地文件路径</b>，可离线使用、随意拷贝分享。</p>
-        <p>如需新增工具，可点击右上角「＋ 添加工具」，把对应的 <code>.html</code> 文件放到本目录即可（自定义工具以独立文件方式打开）。若希望新工具也内嵌、彻底无路径，可使用随附的 <code>build_consolidated.py</code> 重新生成本页。</p>
-      </div>
-    </details>
   </main>
 
   <footer>
@@ -373,34 +383,6 @@
     </div>
   </div>
 
-  <!-- 添加工具弹窗 -->
-  <div class="modal modal--center" id="addModal" role="dialog" aria-modal="true" aria-labelledby="addTitle" hidden>
-    <div class="modal__scrim" data-close-add></div>
-    <div class="modal__panel">
-      <div class="modal__bar">
-        <div class="modal__title"><h2 id="addTitle">添加新工具</h2></div>
-        <div class="modal__actions"><button class="btn btn--icon" data-close-add aria-label="关闭">✕</button></div>
-      </div>
-      <form class="add-form" id="addForm">
-        <label>工具名称<input name="name" required placeholder="如：YHLO IBC 新工具"></label>
-        <label>文件名（.html）<input name="file" required placeholder="新工具.html"></label>
-        <label>分类
-          <select name="category">
-            <option value="animation">动画演示</option>
-            <option value="doc">文档参考</option>
-            <option value="calc">计算工具</option>
-          </select>
-        </label>
-        <label>功能说明<input name="desc" placeholder="一句话说明"></label>
-        <label>标签（逗号分隔）<input name="tags" placeholder="标签1, 标签2"></label>
-        <p class="add-note">请先把对应的 .html 文件放到本工具集同一目录下，再填写上面的文件名。</p>
-        <div class="add-actions">
-          <button type="button" class="btn btn--ghost" data-close-add>取消</button>
-          <button type="submit" class="btn btn--primary">添加</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
 <script>
 /* =====================================================================
@@ -672,14 +654,13 @@ modal.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click"
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
   if (modal.classList.contains("open")) closeTool();
-  else if (addModal.classList.contains("open")) closeAdd();
 });
 
 /* ============ 自定义排序（本地持久化） ============ */
 const ORDER_KEY = "xiang_tools_order_v1";
 function loadOrder(){ try{ return JSON.parse(localStorage.getItem(ORDER_KEY)) || null; }catch(_){ return null; } }
 function saveOrder(ids){ try{ localStorage.setItem(ORDER_KEY, JSON.stringify(ids)); }catch(_){} }
-function allTools(){ return TOOLS.concat(userTools); }
+function allTools(){ return TOOLS.slice(); }
 function orderedTools(){
   const saved = loadOrder();
   const all = allTools();
@@ -734,40 +715,29 @@ function commitOrder(){
   document.getElementById("resetOrder").hidden = false;
 }
 
-/* ============ 自定义工具（页内添加） ============ */
-const USER_KEY = "xiang_user_tools_v1";
-function loadUserTools(){ try{ return JSON.parse(localStorage.getItem(USER_KEY)) || []; }catch(_){ return []; } }
-function saveUserTools(){ try{ localStorage.setItem(USER_KEY, JSON.stringify(userTools)); }catch(_){} }
-let userTools = loadUserTools();
-
-const addModal = document.getElementById("addModal");
-const addForm = document.getElementById("addForm");
-const addBtn = document.getElementById("addTool");
-function openAdd(){
-  addModal.hidden = false; addModal.classList.add("open");
-  document.body.style.overflow = "hidden";
-  addForm.name.focus();
-}
-function closeAdd(){
-  addModal.classList.remove("open"); addModal.hidden = true;
-  document.body.style.overflow = ""; addForm.reset();
-}
-addBtn.addEventListener("click", openAdd);
-addModal.querySelectorAll("[data-close-add]").forEach(el => el.addEventListener("click", closeAdd));
-addForm.addEventListener("submit", e => {
-  e.preventDefault();
-  const fd = new FormData(addForm);
-  const name = (fd.get("name") || "").toString().trim();
-  const file = (fd.get("file") || "").toString().trim();
-  if (!name || !file) return;
-  const category = (fd.get("category") || "calc").toString();
-  const desc = (fd.get("desc") || "").toString().trim();
-  const tags = (fd.get("tags") || "").toString().split(/[,，]/).map(s => s.trim()).filter(Boolean);
-  userTools.push({ id: "user-" + Date.now().toString(36), name, file, category, desc, tags, user: true });
-  saveUserTools();
-  closeAdd();
-  render(true);
-});
+/* ============ 登录验证 ============ */
+(function(){
+  const PASS = "YHLOIBC";
+  const overlay = document.getElementById("loginOverlay");
+  const input = document.getElementById("loginInput");
+  const btn = document.getElementById("loginBtn");
+  const err = document.getElementById("loginErr");
+  if (sessionStorage.getItem("xiang_auth") === "1") { overlay.classList.add("unlocked"); }
+  function unlock(){
+    if (input.value === PASS) {
+      sessionStorage.setItem("xiang_auth", "1");
+      overlay.classList.add("unlocked");
+      err.classList.remove("show");
+    } else {
+      err.classList.add("show");
+      input.value = ""; input.focus();
+      setTimeout(() => err.classList.remove("show"), 2000);
+    }
+  }
+  btn.addEventListener("click", unlock);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
+  input.focus();
+})();
 
 /* ============ 初始化 ============ */
 buildFilters();
